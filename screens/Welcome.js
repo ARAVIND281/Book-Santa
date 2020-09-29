@@ -49,7 +49,6 @@ export default class Welcome extends Component{
         );
      })
      .catch((error)=> {
-       // Handle Errors here.
        var errorCode = error.code;
        var errorMessage = error.message;
        return Alert.alert(errorMessage)

@@ -13,7 +13,8 @@ export default function App() {
 
 const switchNavigator = createSwitchNavigator({
   WelcomeScreen:{screen: WelcomeScreen},
-  Drawer:{screen: AppDrawerNavigator}
+  Drawer:{screen: AppDrawerNavigator},
+  Bottomtab:{screen:AppTabNavigator},
 })
 
 const AppContainer =  createAppContainer(switchNavigator);
