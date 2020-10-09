@@ -19,16 +19,16 @@ export default class Welcome extends React.Component {
         };
     }
 
-    
+
     showModal = () => {
         <Modal
             animationType="fade"
             transparent={true}
             visible={this.state.isModalVisible}
         >
-            <View style = {{flex:1, borderRadius:20, backgroundColor:'#ffffff', justifyContent:'center', alignItems:'center'}}>
-                <ScrollView style={{width:'100%'}}>
-                    <KeyboardAvoidingView style = {{flex:1,justifyContent:'center',alignItems:'center'}}>
+            <View style={{ flex: 1, borderRadius: 20, backgroundColor: '#ffffff', justifyContent: 'center', alignItems: 'center' }}>
+                <ScrollView style={{ width: '100%' }}>
+                    <KeyboardAvoidingView style={{ flex: 1, justifyContent: 'center', alignItems: 'center' }}>
                         <Text>Register here</Text>
                         <TextInput
                             placeholder='Fist Name'
@@ -76,11 +76,11 @@ export default class Welcome extends React.Component {
                             style={styles.textInput}
                         />
                         <TouchableOpacity
-                        onPress={() => this.userSignUp(this.state.emailId, this.state.password, this.state.confirmpassword) }>
+                            onPress={() => this.userSignUp(this.state.emailId, this.state.password, this.state.confirmpassword)}>
                             <Text>Sign up</Text>
                         </TouchableOpacity>
                         <TouchableOpacity
-                            onPress={() => { this.setState({isModalVisible:false}) }}>
+                            onPress={() => { this.setState({ isModalVisible: false }) }}>
                             <Text>cancel</Text>
                         </TouchableOpacity>
                     </KeyboardAvoidingView>
@@ -90,33 +90,33 @@ export default class Welcome extends React.Component {
     }
 
     userSignUp = (emailId, password, confirmPassword) => {
-        if (password !== confirmPassword){
+        if (password !== confirmPassword) {
             return Alert.alert("passowrd do not match");
         }
-        else{            
-           firebase.auth().createUserWithEmailAndPassword(emailId, password)
-            .then(() => {
-                db.collection('user').add({
-                    first_name : this.state.firstName,
-                    lastName : this.state.lastName,
-                    address : this.state.address,
-                    contact : this.state.contact,
-                    pincode : this.state.pincode,
+        else {
+            firebase.auth().createUserWithEmailAndPassword(emailId, password)
+                .then(() => {
+                    db.collection('user').add({
+                        first_name: this.state.firstName,
+                        lastName: this.state.lastName,
+                        address: this.state.address,
+                        contact: this.state.contact,
+                        pincode: this.state.pincode,
+                    })
+                    return Alert.alert("User added successfully",
+                        '',
+                        [
+                            { text: 'OK', onPress: () => this.setState({ 'isModalVisible': false }) }
+                        ])
                 })
-                return Alert.alert("User added successfully",
-                '',
-                [
-                    {text:'OK', onPress:()=>this.setState({'isModalVisible':false})}
-                ])
-            })
-            .catch(function (error) {
-                var errorCode = error.code;
-                var errorMessage = error.message;
+                .catch(function (error) {
+                    var errorCode = error.code;
+                    var errorMessage = error.message;
 
-                return Alert.alert(errorMessage);
-            });
+                    return Alert.alert(errorMessage);
+                });
 
-           
+
         }
     }
 
@@ -139,9 +139,9 @@ export default class Welcome extends React.Component {
     render() {
         return (
             <View style={{ flex: 1, backgroundColor: '#58be85', justifyContent: 'center', alignItems: 'center' }}>
-               <View>
-                {this.showModal()}   
-                </View> 
+                <View>
+                    {this.showModal()}
+                </View>
                 <View>
                     <Text style={{ color: '#ff4500', fontSize: 20, fontWeight: 'bold', justifyContent: 'center', alignItems: 'center' }}>
                         Book Santa
@@ -163,13 +163,15 @@ export default class Welcome extends React.Component {
                 <View>
                     <TouchableOpacity
                         onPress={() => { this.Login(this.state.emailId, this.state.password) }}
-                        style = {styles.button}>
+                        style={styles.button}>
                         <Text style={styles.welcomeButtontext}>Login</Text>
                     </TouchableOpacity>
                     <TouchableOpacity
-                        onPress={() => { this.setState({isModalVisible:true})
-                        console.log(this.state.isModalVisible)}}
-                        style = {styles.button}>
+                        onPress={() => {
+                            this.setState({ isModalVisible: true })
+                            console.log(this.state.isModalVisible)
+                        }}
+                        style={styles.button}>
                         <Text style={styles.welcomeButtontext}>Sign up</Text>
                     </TouchableOpacity>
                 </View>
